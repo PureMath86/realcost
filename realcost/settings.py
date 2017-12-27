@@ -15,10 +15,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1d6%m_jbtsus01m-c7osnsfl2rkqxfoofgmpn=b!)$yb3j6-aa'
+SECRET_KEY = 's3cr3t_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -79,12 +79,20 @@ WSGI_APPLICATION = 'realcost.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd2ncg2n0dpkp9l',
+#         'USER': 'kxpsmdsmqvsovq',
+#         'PASSWORD': '8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360',
+#         'HOST': 'ec2-50-19-251-65.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
