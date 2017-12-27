@@ -1,34 +1,64 @@
-import dj_database_url
-from decouple import Csv, config
-from unipath import Path
+"""
+Django settings for realcost project.
+For more information on this file, see
+https://docs.djangoproject.com/en/1.7/topics/settings/
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/1.7/ref/settings/
+"""
 
-PROJECT_DIR = Path(__file__).parent
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-SECRET_KEY = config('SECRET_KEY')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = '1d6%m_jbtsus01m-c7osnsfl2rkqxfoofgmpn=b!)$yb3j6-aa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # insert your TEMPLATE_DIRS here
+            os.path.join(BASE_DIR, 'realcost/templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'crispy_forms'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -36,7 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -45,27 +75,19 @@ ROOT_URLCONF = 'realcost.urls'
 
 WSGI_APPLICATION = 'realcost.wsgi.application'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            PROJECT_DIR.child('templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-            'debug': DEBUG
-        },
-    },
-]
+
+# Database
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -77,34 +99,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = (
-    ('en', 'English'),
-    ('pt-br', 'Portuguese'),
-    ('es', 'Spanish'),
-    ('zh-cn', 'Chinese'),
-)
-
-LOCALE_PATHS = (PROJECT_DIR.child('locale'), )
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = PROJECT_DIR.parent.child('staticfiles')
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'realcost/static')
+
+# Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_DIR.child('static'),
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'realcost/static_temp'),
 )
-
-MEDIA_ROOT = PROJECT_DIR.parent.child('media')
-MEDIA_URL = '/media/'
-
-LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = '/feeds/'
-
-ALLOWED_SIGNUP_DOMAINS = ['*']
-
-FILE_UPLOAD_TEMP_DIR = '/tmp/'
-FILE_UPLOAD_PERMISSIONS = 0o644
-
-TAGGIT_CASE_INSENSITIVE = True
