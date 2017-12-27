@@ -2,3 +2,4 @@ gunicorn==19.3.0
 Django==1.10.5
 django-crispy-forms==1.6.1
 wsgiref==0.1.2
+dj_database_url
