@@ -33,11 +33,16 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# PostgreSQL conf
+POSTGRES_PASSWORD=8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360
+POSTGRES_USER=kxpsmdsmqvsovq
+POSTGRES_DB=d2ncg2n0dpkp9l
+DATABASE_URL=postgres://kxpsmdsmqvsovq:8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360@ec2-50-19-251-65.compute-1.amazonaws.com:5432/d2ncg2n0dpkp9l
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+# Main environmental variables
+DEBUG=False
+SECRET_KEY=s3cr3t_key
+ALLOWED_HOSTS=*
 
 DATABASES = {
     'default': dj_database_url.config(
