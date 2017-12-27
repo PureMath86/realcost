@@ -55,7 +55,10 @@ ROOT_URLCONF = 'realcost.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # insert your TEMPLATE_DIRS here
+            os.path.join(BASE_DIR, 'realcost/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
