@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'realcost.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2ncg2n0dpkp9l',
+        'USER': 'kxpsmdsmqvsovq',
+        'PASSWORD': '8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360',
+        'HOST': 'ec2-50-19-251-65.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
