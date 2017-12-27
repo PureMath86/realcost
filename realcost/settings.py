@@ -78,18 +78,19 @@ WSGI_APPLICATION = 'realcost.wsgi.application'
 
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'd2ncg2n0dpkp9l',
-#         'USER': 'kxpsmdsmqvsovq',
-#         'PASSWORD': '8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360',
-#         'HOST': 'ec2-50-19-251-65.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2ncg2n0dpkp9l',
+        'USER': 'kxpsmdsmqvsovq',
+        'PASSWORD': '8274071216e7b2fd378a1bc73a29009cead9d27555f79cc216b40d2935c77360',
+        'HOST': 'ec2-50-19-251-65.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
+
+DATABASES['default'].update(db_from_env)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
