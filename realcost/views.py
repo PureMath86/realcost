@@ -24,7 +24,7 @@ class RealCostView(View):
         # Effective Dealership APR is calculated using Newton root-finding Method with initial approximation of the advertised APR
         # The root-finding library only works with floats
         initial_guess = self.get_dealership_apr_initial_guess(dealership_apr)
-        effective_dealership_apr = round(12 * 100 * (float(initial_guess) * float(bank_principle) * float(loan_periods) * float(dealership_monthly_payment)))
+        effective_dealership_apr = round(12 * 100 * (float(initial_guess) * float(bank_principle) / (float(loan_periods) * float(dealership_monthly_payment))))
         return effective_dealership_apr
 
 
